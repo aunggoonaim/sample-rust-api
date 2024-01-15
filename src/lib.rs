@@ -18,6 +18,7 @@ mod dto;
 mod error;
 mod middleware;
 mod handlers;
+mod controller;
 mod model;
 mod service;
 mod sql;
@@ -41,8 +42,8 @@ pub fn app(pg_pool: PgPool) -> Router {
 
     Router::new()
         .route("/", get(handlers::home))
-        .route("/login", post(handlers::login))
-        .route("/register", post(handlers::register))
+        .route("/login", post(controller::user_controller::login))
+        .route("/register", post(controller::user_controller::register))
         .layer(middleware_stack)
         .route_layer(axum::middleware::from_fn(middleware::auth))
 }
