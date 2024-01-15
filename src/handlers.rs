@@ -9,10 +9,18 @@ use crate::{
     config::constants::BEARER,
     dto::{LoginInput, RegisterInput, TokenPayload},
     error::{ApiResult, Error},
-    model::User,
     service::AuthService,
     utils::{jwt, validate_payload},
 };
+
+pub async fn home(
+    Extension(pool): Extension<PgPool>
+) -> ApiResult<Json<TokenPayload>> {
+    Ok(Json(TokenPayload {
+        access_token: String::from(""),
+        token_type: BEARER.to_string(),
+    }))
+}
 
 pub async fn login(
     Extension(pool): Extension<PgPool>,

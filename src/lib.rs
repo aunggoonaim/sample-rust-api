@@ -3,18 +3,20 @@ extern crate lazy_static;
 #[macro_use]
 extern crate serde;
 
+use std::time::Duration;
+
 use axum::{
     routing::{get, post},
-    Router,
+    Router, error_handling::HandleErrorLayer, BoxError, http::StatusCode,
 };
 use sqlx::PgPool;
-use tower::ServiceBuilder;
+use tower::{ServiceBuilder, timeout::TimeoutLayer};
 use tower_http::add_extension::AddExtensionLayer;
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
 
 mod dto;
 mod error;
-mod extractors;
+mod middleware;
 mod handlers;
 mod model;
 mod service;
@@ -28,10 +30,19 @@ pub fn app(pg_pool: PgPool) -> Router {
         .layer(TraceLayer::new_for_http())
         .layer(CorsLayer::permissive())
         .layer(AddExtensionLayer::new(pg_pool))
+        .layer(
+            ServiceBuilder::new()
+                .layer(HandleErrorLayer::new(|_: BoxError| async {
+                    StatusCode::REQUEST_TIMEOUT
+                }))
+                .layer(TimeoutLayer::new(Duration::from_secs(10)))
+        )
         .into_inner();
 
     Router::new()
+        .route("/", get(handlers::home))
         .route("/login", post(handlers::login))
         .route("/register", post(handlers::register))
         .layer(middleware_stack)
+        .route_layer(axum::middleware::from_fn(middleware::auth))
 }
