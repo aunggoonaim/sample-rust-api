@@ -2,6 +2,7 @@
 name = "sample_rust_api"
 version = "1.0.0"
 authors = ["Aunggoon Arpasunun <aunggoon.a@gmail.com>"]
+edition = "2021"
 license = "MIT"
 
 [dependencies]
@@ -16,7 +17,7 @@ lazy_static = "1.4"
 rayon = "1.5"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-sqlx = { version = "0.5", features = [
+sqlx = { version = "0.7", features = [
     "runtime-tokio-rustls",
     "postgres",
     "macros",

@@ -2,6 +2,8 @@
 extern crate lazy_static;
 #[macro_use]
 extern crate serde;
+#[macro_use]
+extern  crate clap;
 
 use axum::{
     routing::{get, post},
