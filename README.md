@@ -30,4 +30,4 @@ This repository provides an example of:
 
 - POST `/register` - required fields: `name, email, password`, returns bearer token
 - POST `/login` - required fields: `email, password`, returns bearer token
-- GET `/authorize` - returns user
+- GET `/` - returns home
