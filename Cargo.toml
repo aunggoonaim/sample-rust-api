@@ -2,7 +2,6 @@
 name = "sample_rust_api"
 version = "1.0.0"
 authors = ["Aunggoon Arpasunun <aunggoon.a@gmail.com>"]
-edition = "2024"
 license = "MIT"
 
 [dependencies]

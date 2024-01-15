@@ -215,32 +215,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "axum_jwt_example"
-version = "0.1.0"
-dependencies = [
- "axum",
- "bcrypt",
- "chrono",
- "clap",
- "dotenv",
- "headers",
- "jsonwebtoken",
- "lazy_static",
- "rayon",
- "serde",
- "serde_json",
- "sqlx",
- "thiserror",
- "tokio",
- "tower",
- "tower-http 0.4.4",
- "tracing",
- "tracing-subscriber",
- "uuid 1.6.1",
- "validator",
-]
-
-[[package]]
 name = "backtrace"
 version = "0.3.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1544,6 +1518,32 @@ name = "ryu"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "254df5081ce98661a883445175e52efe99d1cb2a5552891d965d2f5d0cad1c16"
+
+[[package]]
+name = "sample_rust_api"
+version = "1.0.0"
+dependencies = [
+ "axum",
+ "bcrypt",
+ "chrono",
+ "clap",
+ "dotenv",
+ "headers",
+ "jsonwebtoken",
+ "lazy_static",
+ "rayon",
+ "serde",
+ "serde_json",
+ "sqlx",
+ "thiserror",
+ "tokio",
+ "tower",
+ "tower-http 0.4.4",
+ "tracing",
+ "tracing-subscriber",
+ "uuid 1.6.1",
+ "validator",
+]
 
 [[package]]
 name = "scopeguard"
