@@ -13,8 +13,6 @@ pub enum Error {
     #[error(transparent)]
     TokioRecvError(#[from] tokio::sync::oneshot::error::RecvError),
     #[error(transparent)]
-    AxumTypedHeaderError(#[from] axum::extract::rejection::TypedHeaderRejection),
-    #[error(transparent)]
     AxumExtensionError(#[from] axum::extract::rejection::ExtensionRejection),
     #[error(transparent)]
     ValidationError(#[from] validator::ValidationErrors),

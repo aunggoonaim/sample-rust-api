@@ -2,8 +2,6 @@
 extern crate lazy_static;
 #[macro_use]
 extern crate serde;
-#[macro_use]
-extern  crate clap;
 
 use axum::{
     routing::{get, post},
@@ -35,6 +33,5 @@ pub fn app(pg_pool: PgPool) -> Router {
     Router::new()
         .route("/login", post(handlers::login))
         .route("/register", post(handlers::register))
-        .route("/authorize", get(handlers::authorize))
         .layer(middleware_stack)
 }

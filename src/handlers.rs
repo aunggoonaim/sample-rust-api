@@ -14,13 +14,9 @@ use crate::{
     utils::{jwt, validate_payload},
 };
 
-pub async fn authorize(user: User) -> Json<User> {
-    Json(user)
-}
-
 pub async fn login(
-    Json(input): Json<LoginInput>,
     Extension(pool): Extension<PgPool>,
+    Json(input): Json<LoginInput>,
 ) -> ApiResult<Json<TokenPayload>> {
     validate_payload(&input)?;
     let user = AuthService::sign_in(input, &pool)
@@ -34,8 +30,8 @@ pub async fn login(
 }
 
 pub async fn register(
-    Json(input): Json<RegisterInput>,
     Extension(pool): Extension<PgPool>,
+    Json(input): Json<RegisterInput>,
 ) -> ApiResult<(StatusCode, Json<TokenPayload>)> {
     validate_payload(&input)?;
     let user = AuthService::sign_up(input, &pool).await?;

@@ -1,7 +1,5 @@
-use std::net::SocketAddr;
-
 use sample_rust_api::config;
-use clap::Parser;
+use tokio::net::TcpListener;
 use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
@@ -15,11 +13,10 @@ async fn main() {
         .init();
 
     let pg_pool = sqlx::PgPool::retrieve().await;
-    let config = config::env::ServerConfig::parse();
-    let addr = SocketAddr::from((config.host, config.port));
-    tracing::debug!("listening on {}", addr);
-    let server =
-        axum::Server::bind(&addr).serve(sample_rust_api::app(pg_pool).into_make_service());
+    let addr = TcpListener::bind("127.0.0.1:8080").await.unwrap();
+    tracing::debug!("listening on 127.0.0.1:8080 !");
+    let server = 
+        axum::serve(addr, sample_rust_api::app(pg_pool).into_make_service());
 
     if let Err(err) = server.await {
         tracing::error!("server error: {:?}", err);
