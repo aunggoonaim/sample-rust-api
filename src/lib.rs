@@ -14,15 +14,15 @@ use tower::{ServiceBuilder, timeout::TimeoutLayer};
 use tower_http::add_extension::AddExtensionLayer;
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
 
-mod dto;
 mod error;
 mod middleware;
 mod handlers;
 mod controller;
-mod model;
 mod service;
-mod sql;
+mod model;
+mod entity;
 mod utils;
+mod query;
 
 pub mod config;
 
@@ -42,8 +42,8 @@ pub fn app(pg_pool: PgPool) -> Router {
 
     Router::new()
         .route("/", get(handlers::home))
-        .route("/login", post(controller::user_controller::login))
-        .route("/register", post(controller::user_controller::register))
+        .nest("/user", controller::user_controller::user_router())
+        .nest("/role", controller::role_controller::role_router())
         .layer(middleware_stack)
         .route_layer(axum::middleware::from_fn(middleware::auth))
 }

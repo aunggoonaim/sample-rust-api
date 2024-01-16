@@ -5,7 +5,7 @@ use axum::{
     extract::Request,
 };
 
-use crate::model::User;
+use crate::entity::user::User;
 
 pub async fn auth(mut req: Request, next: Next) -> Result<Response, StatusCode> {
     let auth_header = req.headers()

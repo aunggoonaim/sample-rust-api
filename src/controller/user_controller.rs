@@ -1,17 +1,28 @@
 use axum::{
-    extract::Extension,
+    extract::{Extension, Path},
     http::StatusCode,
-    Json,
+    Json, Router, routing::{post, get},
 };
 use sqlx::PgPool;
 
 use crate::{
     config::constants::BEARER,
-    dto::{LoginInput, RegisterInput, TokenPayload},
+    model::user::{LoginInput, RegisterInput},
+    model::auth::TokenPayload,
     error::{ApiResult, Error},
-    service::AuthService,
-    utils::{jwt, validate_payload},
+    service::{auth::AuthService, user::UserService},
+    utils::{jwt, validate_payload}, entity::user::User,
 };
+
+pub fn user_router() -> Router {
+    return Router::new().route_service(
+        "/",
+        Router::new()
+        .route("/:id", get(get_by_id))
+        .route("/login", post(login))
+        .route("/register", post(register)),
+    );
+}
 
 pub async fn login(
     Extension(pool): Extension<PgPool>,
@@ -42,4 +53,14 @@ pub async fn register(
             token_type: BEARER.to_string(),
         }),
     ))
+}
+
+pub async fn get_by_id(
+    Extension(pool): Extension<PgPool>,
+    Path(id): Path<i32>
+) -> ApiResult<Json<User>> {
+    let user = UserService::get_user_by_id(id, &pool)
+        .await
+        .map_err(|_| Error::WrongCredentials)?;
+    Ok(Json(user))
 }

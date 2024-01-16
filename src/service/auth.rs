@@ -2,11 +2,11 @@ use chrono::Utc;
 use sqlx::PgPool;
 
 use crate::{
-    dto::{LoginInput, RegisterInput},
     error::{Error, Result},
-    model::{CreateUserData, User},
     utils::encryption,
 };
+use crate::entity::user::User;
+use crate::model::user::{LoginInput, RegisterInput, CreateUserData};
 
 pub struct AuthService;
 

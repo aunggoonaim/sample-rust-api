@@ -17,12 +17,3 @@ pub struct User {
 impl User {
     pub const TABLE: &'static str = "users";
 }
-
-#[derive(Debug)]
-pub struct CreateUserData {
-    pub name: String,
-    pub email: String,
-    pub password: String,
-    pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
-}

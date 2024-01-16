@@ -2,7 +2,8 @@ use sqlx::PgPool;
 
 use crate::{
     error::Result,
-    model::{CreateUserData, User},
+    model::user::CreateUserData,
+    entity::user::User
 };
 
 impl User {

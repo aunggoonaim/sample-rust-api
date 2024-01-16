@@ -6,8 +6,7 @@ use sqlx::PgPool;
 
 use crate::{
     config::constants::BEARER,
-    dto::TokenPayload,
-    error::ApiResult
+    error::ApiResult, model::auth::TokenPayload
 };
 
 pub async fn home(

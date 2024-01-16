@@ -1,9 +1,15 @@
 use validator::Validate;
-
-use crate::model::User;
+use chrono::{DateTime, Utc};
 
 #[derive(Debug, Deserialize, Validate)]
 pub struct LoginInput {
+    #[validate(email)]
+    pub email: String,
+    pub password: String,
+}
+
+#[derive(Debug, Deserialize, Validate)]
+pub struct GetUserById {
     #[validate(email)]
     pub email: String,
     pub password: String,
@@ -19,14 +25,11 @@ pub struct RegisterInput {
     pub password: String,
 }
 
-#[derive(Debug)]
-pub struct AuthPayload {
-    pub token: String,
-    pub user: User,
-}
-
-#[derive(Debug, Serialize)]
-pub struct TokenPayload {
-    pub access_token: String,
-    pub token_type: String,
+#[derive(Debug, Deserialize)]
+pub struct CreateUserData {
+    pub name: String,
+    pub email: String,
+    pub password: String,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
 }
