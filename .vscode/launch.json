@@ -7,16 +7,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in library 'axum_jwt_example'",
+            "name": "Debug unit tests in library 'sample_rust_api'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
                     "--lib",
-                    "--package=axum_jwt_example"
+                    "--package=sample_rust_api"
                 ],
                 "filter": {
-                    "name": "axum_jwt_example",
+                    "name": "sample_rust_api",
                     "kind": "lib"
                 }
             },
@@ -31,7 +31,7 @@
                 "args": [
                     "build",
                     "--bin=server",
-                    "--package=axum_jwt_example"
+                    "--package=sample_rust_api"
                 ],
                 "filter": {
                     "name": "server",
@@ -50,7 +50,7 @@
                     "test",
                     "--no-run",
                     "--bin=server",
-                    "--package=axum_jwt_example"
+                    "--package=sample_rust_api"
                 ],
                 "filter": {
                     "name": "server",
