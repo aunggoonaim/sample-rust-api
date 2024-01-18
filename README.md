@@ -31,3 +31,7 @@ This repository provides an example of:
 - POST `/register` - required fields: `name, email, password`, returns bearer token
 - POST `/login` - required fields: `email, password`, returns bearer token
 - GET `/` - returns home
+
+## Deploy with docker
+
+`docker buildx build . -t aimdevgroup/sample-rust-axum-api --platform linux/amd64 --push`
