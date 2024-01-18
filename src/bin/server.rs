@@ -14,7 +14,7 @@ async fn main() {
 
     let pg_pool = sqlx::PgPool::retrieve().await;
     let addr = TcpListener::bind("127.0.0.1:8080").await.unwrap();
-    tracing::debug!("Listening on 127.0.0.1:8080 !");
+    println!("Listening on 127.0.0.1:8080 !");
     let server = 
         axum::serve(addr, sample_rust_api::app(pg_pool).into_make_service());
 
