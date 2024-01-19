@@ -15,13 +15,10 @@ use crate::{
 };
 
 pub fn user_router() -> Router {
-    return Router::new().route_service(
-        "/",
-        Router::new()
-        .route("/:id", get(get_by_id))
-        .route("/login", post(login))
-        .route("/register", post(register)),
-    );
+    return Router::new()
+        .route("/user/:id", get(get_by_id))
+        .route("/user/login", post(login))
+        .route("/user/register", post(register));
 }
 
 pub async fn login(
